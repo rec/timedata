@@ -3,7 +3,8 @@ cdef extern from "<timedata/color/renderer_inl.h>" namespace "timedata::color_li
         CRenderer(Render3&)
         CRenderer()
         void render(float level, CColorListRGB& input, char* output)
-        # void renderGeneric[T](float level, T& input, char* output)
+        void renderGeneric[T](float level, T& input, char* output)
+
 
 cdef extern from "<timedata/color/rgbAdaptor.h>" namespace "timedata::color_list":
     cdef cppclass RGBAdaptor[T]:

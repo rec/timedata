@@ -68,5 +68,8 @@ template <typename T>
 bool convertSampleCython(
     PointerAsInt inPtr, std::string const& inputModel, T& out);
 
+using RGBIndexer = std::function<ColorRGB (size_t index)>;
+
+
 } // converter
 } // timedata
