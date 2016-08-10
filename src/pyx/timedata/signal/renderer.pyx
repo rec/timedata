@@ -2,9 +2,7 @@ cdef extern from "<timedata/color/renderer_inl.h>" namespace "timedata::color_li
     cdef cppclass CRenderer:
         CRenderer(Render3&)
         CRenderer()
-        void render(float level, CColorListRGB& input, char* out)
-        void renderGeneric(
-                float level, RGBIndexer& input, size_t size, char* out)
+        void render(float level, RGBIndexer& input, size_t size, char* out)
 
 
 cdef class Renderer(_Render3):
@@ -26,5 +24,5 @@ cdef class Renderer(_Render3):
         cdef Indexer indexer = <Indexer> colors.indexer()
         cdef size_t size = len(colors)
         out = out or bytearray(3 * size)
-        self.renderer.renderGeneric(self.level, indexer.cdata, size, out)
+        self.renderer.render(self.level, indexer.cdata, size, out)
         return out

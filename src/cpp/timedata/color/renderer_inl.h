@@ -15,7 +15,7 @@ inline CRenderer::CRenderer(Render3 r)
           perm_(getPerm(r.permutation)) {
 }
 
-void CRenderer::renderGeneric(
+void CRenderer::render(
         float level, RGBIndexer const& colors, size_t size, char* out) {
     for (size_t i = 0; i < size; ++i) {
         auto color = colors(i);
@@ -25,11 +25,6 @@ void CRenderer::renderGeneric(
             *out = static_cast<char>(gamma);
         }
     }
-}
-
-inline void CRenderer::render(
-        float level, CColorListRGB const& colors, char* out) {
-    return renderGeneric(level, getIndexer(colors), colors.size(), out);
 }
 
 inline CRenderer::Perm CRenderer::getPerm(Render3::Permutation perm) {
