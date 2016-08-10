@@ -1,9 +1,13 @@
 #pragma once
 
+#include <functional>
+
 #include <timedata/signal/convert_inl.h>
 
 namespace timedata {
 namespace color_list {
+
+using RGBIndexer = std::function<ColorRGB (size_t index)>;
 
 template <typename ColorList>
 struct RGBAdaptor {
