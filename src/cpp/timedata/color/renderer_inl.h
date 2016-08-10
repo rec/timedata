@@ -30,7 +30,7 @@ void CRenderer::renderGeneric(
 
 inline void CRenderer::render(
         float level, CColorListRGB const& colors, char* out) {
-    return renderGeneric(level, RGBAdaptor<CColorListRGB>{colors}, out);
+    return renderGeneric(level, RGBAdaptor<CColorListRGB>(colors), out);
 }
 
 inline CRenderer::Perm CRenderer::getPerm(Render3::Permutation perm) {

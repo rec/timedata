@@ -7,6 +7,7 @@ namespace color_list {
 
 template <typename ColorList>
 struct RGBAdaptor {
+    RGBAdaptor(ColorList const& ls) : list(ls) {}
     ColorList const& list;
 
     ColorRGB operator[](size_t i) const {
