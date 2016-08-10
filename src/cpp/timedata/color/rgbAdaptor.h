@@ -18,6 +18,5 @@ RGBIndexer getIndexer(ColorList const& colors) {
     };
 }
 
-
 }  // timedata
 }  // color_list
