@@ -137,7 +137,7 @@ cdef extern from "<$include_file>" namespace "$namespace":
     cpdef Indexer indexer($classname self):
         """Return an RGBIndexer in Python form."""
         cpdef Indexer indexer = Indexer()
-        indexer.indexer = getIndexer(self.cdata)
+        indexer.cdata = getIndexer(self.cdata)
         return indexer
 
     cpdef $classname insert($classname self, int key,

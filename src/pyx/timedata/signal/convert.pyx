@@ -13,4 +13,4 @@ cdef extern from "<timedata/color/rgbAdaptor.h>" namespace "timedata::color_list
     RGBIndexer getIndexer[T](T& colors)
 
 cdef class Indexer:
-   cpdef RGBIndexer indexer
+   cpdef RGBIndexer cdata
