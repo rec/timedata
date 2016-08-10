@@ -20,8 +20,7 @@ class CRenderer {
 
     /** Render a CColorListRGB to a byte buffer.  The number of bytes pointed to
         by `out` must be at least 3 times the number of colors. */
-    template <typename Colors>
-    void renderGeneric(float level, Colors const&, size_t size, char* out);
+    void renderGeneric(float level, RGBIndexer const&, size_t size, char* out);
 
   private:
     using Perm = std::array<uint8_t, 3>;

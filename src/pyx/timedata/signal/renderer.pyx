@@ -2,8 +2,9 @@ cdef extern from "<timedata/color/renderer_inl.h>" namespace "timedata::color_li
     cdef cppclass CRenderer:
         CRenderer(Render3&)
         CRenderer()
-        void render(float level, CColorListRGB& input, char* output)
-        void renderGeneric[T](float level, T& input, char* output)
+        void render(float level, CColorListRGB& input, char* out)
+        void renderGeneric(
+                float level, RGBIndexer& input, size_t size, char* out)
 
 
 cdef class Renderer(_Render3):
@@ -21,12 +22,9 @@ cdef class Renderer(_Render3):
         def __set__(self, float x):
             self.level = x
 
-    def render(self, object colors, bytearray output=None):
-        cdef ColorListRGB _colors
-        if isinstance(colors, ColorListRGB):
-            _colors = colors
-        else:
-            _colors = ColorListRGB(colors)
-        output = output or bytearray(3 * _colors.cdata.size())
-        self.renderer.render(self.level, _colors.cdata, output)
-        return output
+    def render(self, object colors, bytearray out=None):
+        cdef Indexer indexer = <Indexer> colors.indexer()
+        cdef size_t size = len(colors)
+        out = out or bytearray(3 * size)
+        self.renderer.renderGeneric(self.level, indexer.cdata, size, out)
+        return out
