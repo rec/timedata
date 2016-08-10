@@ -18,19 +18,6 @@ RGBIndexer getIndexer(ColorList const& colors) {
     };
 }
 
-template <typename ColorList>
-struct RGBAdaptor {
-    RGBAdaptor(ColorList const& ls) : colors(ls) {}
-    ColorList const& colors;
-
-    ColorRGB operator[](size_t i) const {
-        ColorRGB result;
-        converter::convertSample(colors[i], result);
-        return result;
-    };
-
-    size_t size() const { return colors.size(); }
-};
 
 }  // timedata
 }  // color_list
