@@ -1,7 +1,7 @@
 import os, stat
 
 
-def make_writable(f, is_writable=True, report=False):
+def make_writable(f, is_writable=True, report=True):
     try:
         os.chmod(f, stat.S_IWRITE if is_writable else stat.S_IREAD)
     except:
