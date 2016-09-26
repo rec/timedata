@@ -30,6 +30,8 @@ cdef extern from "<$include_file>" namespace "$namespace":
     void extend(C$classname&, C$classname&)
     void insert(int key, $itemclass&, C$classname)
 
+    bool permute(C$classname&, bool reverse)
+
     bool remap_to(CIndexList& remap, C$classname&, C$classname&)
     void rotate(C$classname&, int pos)
     void rotate(C$classname&, C$classname&, int pos)
@@ -168,6 +170,21 @@ cdef extern from "<$include_file>" namespace "$namespace":
     cpdef $classname resize($classname self, size_t size):
         """Set the size of the SampleList, filling with black if needed."""
         self.cdata.resize(size)
+        return self
+
+    cpdef $classname permute(self, bool reverse=False):
+        """Return a copy of self, cycled to the next permutation."""
+        return self.copy().permute_into(reverse)
+
+    cpdef $classname permute_to(self, $classname out, bool reverse=False):
+        """Cycle self to the next permutation and store into $classname out."""
+        out.cdata = self.cdata
+        permute(out.cdata, reverse)
+        return self
+
+    cpdef $classname permute_into(self, bool reverse=False):
+        """Cycle self to the next permutation."""
+        permute(self.cdata, reverse)
         return self
 
     cpdef $classname rotate(self, int pos):

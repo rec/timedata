@@ -55,3 +55,9 @@ class TestIndexList(unittest.TestCase):
         # One chance in about 10**5912 that this will fail.  :-D
         self.assertNotEqual(c, list(range(1000)))
         self.assertEqual(list(sorted(c)), list(range(1000)))
+
+    def test_permute(self):
+        il = IndexList(range(4))
+        p = set(tuple(il.permute_into()) for i in range(48))
+        self.assertEqual(len(p), 24)
+        self.assertEqual(il, IndexList(range(4)))

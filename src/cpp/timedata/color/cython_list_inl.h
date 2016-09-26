@@ -555,5 +555,12 @@ void shuffle(ColorVector& colors) {
     std::random_shuffle(colors.begin(), colors.end());
 }
 
+template <typename ColorVector>
+bool permute(ColorVector& colors, bool reverse) {
+    return reverse ?
+            std::prev_permutation(colors.begin(), colors.end()) :
+            std::next_permutation(colors.begin(), colors.end());
+}
+
 } // color_list
 } // timedata
