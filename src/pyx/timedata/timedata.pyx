@@ -9,6 +9,11 @@ include "src/pyx/timedata/signal/convert.pyx"
 include "build/genfiles/timedata/genfiles.pyx"
 include "src/pyx/timedata/signal/renderer.pyx"
 
+try:
+    import timedata_visualizer as visualizer
+except:
+    visualizer = None
+
 locals().update(**_make_module())
 
 print_startup_message()
