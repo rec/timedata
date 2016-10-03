@@ -4,6 +4,8 @@ cdef extern from "<timedata/color/renderer_inl.h>" namespace "timedata::color_li
         CRenderer()
         void render(float level, RGBIndexer& input,
                     size_t offset, size_t size, char* out)
+        void render(float level, RGBIndexer& input,
+                    size_t offset, size_t size, uint64_t out)
 
 
 cdef class Renderer(_Render3):
@@ -22,10 +24,15 @@ cdef class Renderer(_Render3):
             self.level = x
 
     def render(self, object colors, size_t offset=0, int length=-1,
-               bytearray output=None):
+               object buf=None):
         cdef Indexer indexer = <Indexer> colors.indexer()
         cdef size_t size = len(colors) if length < 0 else length
 
-        output = output or bytearray(3 * size)
-        self.renderer.render(self.level, indexer.cdata, offset, size, output)
-        return output
+        buf = buf or bytearray(3 * size)
+        if isinstance(buf, bytearray):
+            self.renderer.render(
+                self.level, indexer.cdata, offset, size, <bytearray> buf)
+        else:
+            self.renderer.render(
+                self.level, indexer.cdata, offset, size, <uint64_t> buf)
+        return buf
